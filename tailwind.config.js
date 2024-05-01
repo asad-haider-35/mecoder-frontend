@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         primary: '#4B5EC1',
-        secondary: '#000000'
+        secondary: '#566298'
       },
       fontFamily: {
         redHatDisplay: ["Red Hat Display", "sans-serif"]
