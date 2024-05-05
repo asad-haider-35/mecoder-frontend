@@ -29,7 +29,7 @@ const Home = () => {
               scale: 0.9
             }}
             onClick={navigateToTest} 
-            className='py-4 px-2 border-primary border-4 rounded-full text-primary w-full text-[20px] font-bold' >
+            className='py-4 px-2 border-primary border-4 rounded-lg text-primary w-full text-[20px] font-bold' >
               Start Test
           </motion.button>
         </div>
