@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#4B5EC1',
-        secondary: '#566298'
+        primary: '#6C63FF',
+        secondary: '#566298',
+        darkGrey: '#656565'
       },
       fontFamily: {
         redHatDisplay: ["Red Hat Display", "sans-serif"]

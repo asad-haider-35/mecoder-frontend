@@ -11,8 +11,8 @@ const QuestionOption = ({ option, onSelect }) => {
             whileTap={{
                 scale: 0.9
             }}
-            className='flex-1 text-left font-semibold font-redHatDisplay text-[20px] md:text-[30px] text-primary
-                        rounded-lg border-4 border-primary py-6 px-8 ' 
+            className='flex-1 text-center font-semibold font-redHatDisplay text-[16px] md:text-[16px] text-darkGrey
+                        rounded-lg border border-primary py-6 px-8 ' 
             onClick={() => onSelect(option)}
         >
                 {option.Text}

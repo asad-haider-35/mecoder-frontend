@@ -3,6 +3,7 @@ import { getQuiz } from '../api/services/QuizService';
 import { Constants } from '../constants/constants';
 import Question from '../components/Question';
 import { useNavigate } from 'react-router-dom';
+import Stepper from '../components/Stepper';
 
 const Quiz = () => {
 
@@ -41,14 +42,19 @@ const Quiz = () => {
     else{
       setDisplayQuestion(quiz.Questions[index + 1]);
     }
-
-    console.log(answerScore);
-    console.log(quizScore);
   }
 
+  if(quiz == null)
+    return (<div></div>);
+
   return (
-    <div className='flex justify-center items-center h-full py-6'>
-      <Question question={displayQuestion} onOptionSelect={onAnswerSelect} />
+    <div className='flex flex-col justify-center items-center h-full py-6'>
+      <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions} currentStep={displayQuestion} />
+
+      <div className='flex justify-center items-center w-full mt-10'>
+        <Question question={displayQuestion} onOptionSelect={onAnswerSelect} />
+      </div>
+      
     </div>
   )
 }
