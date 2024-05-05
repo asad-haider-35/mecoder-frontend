@@ -4,6 +4,7 @@ import { Constants } from '../constants/constants';
 import Question from '../components/Question';
 import { useNavigate } from 'react-router-dom';
 import Stepper from '../components/Stepper';
+import QuizResult from '../components/QuizResult';
 
 const Quiz = () => {
 
@@ -11,7 +12,7 @@ const Quiz = () => {
 
   const [quiz, setQuiz] = useState(null);
   const [displayQuestion, setDisplayQuestion] = useState(null);
-  const [quizScore, setQuizScore] = useState(0);
+  const [quizResponse, setQuizResponse] = useState({});
 
   useEffect(() => {
     getQuiz(Constants.QUIZ_ID).then((response) => {
@@ -22,26 +23,46 @@ const Quiz = () => {
   }, []);
 
   useEffect(() => {
-    if(quiz !== undefined && quiz !== null && quiz.Questions.length > 0)
+    if(quiz !== undefined && quiz !== null && quiz.Questions.length > 0){
       setDisplayQuestion(quiz.Questions[0]); //Initialize to first Quesiton of the Quiz
+
+      let response = {
+        QuizId: quiz.Id,
+        QuizQuestionResponses: []
+      }
+
+      setQuizResponse(response);
+
+    }
     
   }, [quiz])
 
   function onAnswerSelect(answer){
-    let answerScore = quizScore + answer.Score;
-    setQuizScore(answerScore);
-    
+
+    setQuizResponse((prevQuizResponse) => {
+      const newResponse = { ...prevQuizResponse }; // Create a copy of the previous state
+
+      newResponse.QuizQuestionResponses.push({
+        QuestionId: answer.QuestionId,
+        AcquiredScore: answer.Score,
+      });
+      return newResponse;
+    });
+
     let index = quiz.Questions.indexOf(displayQuestion);
 
     if(index === -1)
       return;
 
-    if(index === (quiz.Questions.length - 1)){
-      navigate('/testresult')
-    }
-    else{
+    if(index !== (quiz.Questions.length - 1)){
       setDisplayQuestion(quiz.Questions[index + 1]);
     }
+
+    console.log(quizResponse);
+  }
+
+  function useUpdatedResponse(){
+    
   }
 
   if(quiz == null)
@@ -52,7 +73,11 @@ const Quiz = () => {
       <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions} currentStep={displayQuestion} />
 
       <div className='flex justify-center items-center w-full mt-10'>
-        <Question question={displayQuestion} onOptionSelect={onAnswerSelect} />
+        {quiz.Questions.indexOf(displayQuestion) === (quiz.Questions.length - 1) ? 
+          <QuizResult quizResponse={quizResponse} /> : 
+          <Question question={displayQuestion} onOptionSelect={onAnswerSelect} />
+        }
+        
       </div>
       
     </div>
