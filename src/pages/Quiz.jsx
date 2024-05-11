@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { getQuiz } from '../api/services/QuizService';
 import { Constants } from '../constants/constants';
-import Question from '../components/Question';
 import { useNavigate } from 'react-router-dom';
-import Stepper from '../components/Stepper';
-import QuizResult from '../components/QuizResult';
+import { Question, Stepper, QuizResult } from '../components';
 
 const Quiz = () => {
 
@@ -32,22 +30,19 @@ const Quiz = () => {
       }
 
       setQuizResponse(response);
-
     }
     
   }, [quiz])
 
   function onAnswerSelect(answer){
 
-    setQuizResponse((prevQuizResponse) => {
-      const newResponse = { ...prevQuizResponse }; // Create a copy of the previous state
-
-      newResponse.QuizQuestionResponses.push({
-        QuestionId: answer.QuestionId,
-        AcquiredScore: answer.Score,
-      });
-      return newResponse;
+    let response = quizResponse;
+    response.QuizQuestionResponses.push({
+      QuestionId: answer.QuestionId,
+      AcquiredScore: answer.Score,
     });
+
+    setQuizResponse(response);
 
     let index = quiz.Questions.indexOf(displayQuestion);
 
@@ -57,23 +52,24 @@ const Quiz = () => {
     if(index !== (quiz.Questions.length - 1)){
       setDisplayQuestion(quiz.Questions[index + 1]);
     }
-
-    console.log(quizResponse);
-  }
-
-  function useUpdatedResponse(){
-    
+    else{
+      setDisplayQuestion(null);
+    }
   }
 
   if(quiz == null)
     return (<div></div>);
 
   return (
-    <div className='flex flex-col justify-center items-center h-full py-6'>
-      <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions} currentStep={displayQuestion} />
+    <div className='flex flex-col justify-center items-center py-2 md:py-6'>
+      {displayQuestion === null ?
+        <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions.map((q, i) => (i))} currentStep={quiz.Questions.length - 1} /> :
+        <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions} currentStep={displayQuestion} />
+      }
+      
 
-      <div className='flex justify-center items-center w-full mt-10'>
-        {quiz.Questions.indexOf(displayQuestion) === (quiz.Questions.length - 1) ? 
+      <div className='flex justify-center items-center w-full md:mt-10'>
+        {displayQuestion === null ? 
           <QuizResult quizResponse={quizResponse} /> : 
           <Question question={displayQuestion} onOptionSelect={onAnswerSelect} />
         }

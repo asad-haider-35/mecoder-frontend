@@ -2,10 +2,12 @@ import Question from "./Question";
 import QuestionOption from "./QuestionOption";
 import Stepper from "./Stepper";
 import QuizResult from "./QuizResult";
+import Button from "./Button";
 
-export default {
+export {
     Question,
     QuestionOption,
     Stepper,
-    QuizResult
+    QuizResult,
+    Button
 }
