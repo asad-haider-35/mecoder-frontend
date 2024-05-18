@@ -13,7 +13,7 @@ const Button = ({ text, onClick }) => {
                 scale: 0.9
                 }}
                 onClick={onClick} 
-                className='py-4 px-6 sm:px-10 bg-primary rounded-full text-white text-[12px] sm:text-[20px]' 
+                className='py-3 sm:py-4 px-10 sm:px-14 bg-primary rounded-full text-white text-[16px] sm:text-[20px]' 
             >
                 {text}
             </motion.button>

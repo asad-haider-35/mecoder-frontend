@@ -1,9 +1,11 @@
 import MeCoder from './MeCoder.svg';
-import UmbrellaMan from './umbrella-man.png'
-import StartScreen from './start-screen.png'
+import UmbrellaMan from './UmbrellaMan.svg'
+import StartScreen from './StartScreen.svg'
+import ErrorScreen from './error.svg'
 
 export {
     MeCoder,
     UmbrellaMan,
-    StartScreen
+    StartScreen,
+    ErrorScreen
 }

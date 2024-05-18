@@ -13,11 +13,15 @@ const Quiz = () => {
   const [quizResponse, setQuizResponse] = useState({});
 
   useEffect(() => {
-    getQuiz(Constants.QUIZ_ID).then((response) => {
-      if(response){
-        setQuiz(response.data.Data);
-      }
-    });
+    getQuiz(Constants.QUIZ_ID)
+      .then((response) => {
+        if(response){
+          setQuiz(response.data.Data);
+        }
+      })
+      .catch(error => {
+          navigate('/er');
+      });
   }, []);
 
   useEffect(() => {
@@ -63,8 +67,8 @@ const Quiz = () => {
   return (
     <div className='flex flex-col justify-center items-center py-2 md:py-6'>
       {displayQuestion === null ?
-        <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions.map((q, i) => (i))} currentStep={quiz.Questions.length - 1} /> :
-        <Stepper className={'px-10 py-6 mb-10'} steps={quiz.Questions} currentStep={displayQuestion} />
+        <Stepper className={'px-10 py-6 mb-0'} steps={quiz.Questions.map((q, i) => (i))} currentStep={quiz.Questions.length - 1} /> :
+        <Stepper className={'px-10 py-6 mb-0'} steps={quiz.Questions} currentStep={displayQuestion} />
       }
       
 

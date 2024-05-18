@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Quiz from "./pages/Quiz"
-import Result from "./pages/Result"
+import Error from "./pages/Error"
 import { MeCoder } from "./assets"
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/test" element={ <Quiz /> } />
-        <Route path="/testresult" element={ <Result /> } />
+        <Route path="/er" element={ <Error /> } />
       </Routes>
 
     </div>

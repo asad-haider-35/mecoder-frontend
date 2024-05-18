@@ -9,12 +9,12 @@ const Question = ({ question, onOptionSelect }) => {
         return (<div></div>);
 
     return (
-        <div className='flex flex-col justify-center items-center gap-8 md:gap-10 w-[75%] md:w-[50%] h-full'>
+        <div className='flex flex-col justify-center items-center md:gap-10 w-[75%] md:w-[50%] h-full'>
             <motion.div 
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-                className='flex-1 text-center font-bold font-redHatDisplay text-[18px] md:text-[45px] mb-6'
+                className='flex-1 text-center font-bold font-redHatDisplay text-[24px] md:text-[45px] md:mb-6'
             >
                 {question.Text}
             </motion.div>
